@@ -1,27 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Embed showcase</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Embed showcase</title>
-</head>
+  <body>
+    <div id="booker" />
+    <script src="https://cdn-agendapro.s3.us-west-2.amazonaws.com/libraries/end-user-booker/end-user-booker.js"></script>
+    <script>
+      function getUrlParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
 
-<body>
-  <div id="booker" />
-  <script src="https://cdn-agendapro.s3.us-west-2.amazonaws.com/libraries/end-user-booker/end-user-booker.js"></script>
-  <script>
-    window.EndUserBooker.init('booker', {
-      website: 'barberiadeestebanquito',
-      locale: 'cw',
-      locationId: 359239,
-      companyId: 375462,
-    });
-  </script>
-  </script>
+      function parseIfNumber(value) {
+        if (value === null) return null;
+        const num = parseInt(value, 10);
+        return isNaN(num) ? value : num;
+      }
 
+      const config = {
+        website: getUrlParameter("website"),
+        locale: getUrlParameter("locale"),
+        locationId: parseIfNumber(getUrlParameter("locationId")),
+        companyId: parseIfNumber(getUrlParameter("companyId")),
+      };
 
-</body>
-
+      window.EndUserBooker.init("booker", config);
+    </script>
+  </body>
 </html>
