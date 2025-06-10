@@ -40,7 +40,9 @@
           defaultConfig.companyId,
       };
 
-      window.EndUserBooker.init("booker", config);
+      {
+        window.EndUserBooker && window.EndUserBooker.init("booker", config);
+      }
     </script>
   </body>
 </html>
