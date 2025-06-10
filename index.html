@@ -4,10 +4,217 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Embed showcase</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #667eea;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      nav a:hover {
+        color: #667eea;
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 0;
+      }
+
+      .booking-section {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        padding: 3rem;
+        text-align: center;
+        max-width: 800px;
+        width: 100%;
+        margin: 0 20px;
+      }
+
+      .booking-section h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .booking-section p {
+        font-size: 1.1rem;
+        color: #666;
+        margin-bottom: 2rem;
+        line-height: 1.8;
+      }
+
+      #booker {
+        margin: 2rem 0;
+        min-height: 400px;
+        border-radius: 10px;
+        background: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      footer {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        text-align: center;
+        padding: 2rem 0;
+        margin-top: auto;
+      }
+
+      .footer-content {
+        color: #666;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .footer-links a {
+        text-decoration: none;
+        color: #666;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: #667eea;
+      }
+
+      @media (max-width: 768px) {
+        .header-content {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        nav ul {
+          gap: 1rem;
+        }
+
+        .booking-section {
+          padding: 2rem 1rem;
+          margin: 0 10px;
+        }
+
+        .booking-section h1 {
+          font-size: 2rem;
+        }
+
+        .footer-links {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+
+      .loading-text {
+        color: #667eea;
+        font-size: 1.1rem;
+        opacity: 0.7;
+      }
+    </style>
   </head>
 
   <body>
-    <div id="booker" />
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">Professional Services</div>
+          <nav>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="booking-section">
+        <h1>Book Your Appointment</h1>
+        <p>
+          Schedule your appointment with ease using our convenient booking
+          system.
+        </p>
+
+        <div id="booker">
+          <div class="loading-text">Loading booking system...</div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-links">
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+            <a href="#support">Support</a>
+          </div>
+          <p>&copy; 2025 Professional Services. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
     <script src="https://cdn-agendapro.s3.us-west-2.amazonaws.com/libraries/end-user-booker/end-user-booker-latest.js"></script>
     <script>
       function getUrlParameter(name) {
@@ -29,7 +236,17 @@
         redirect: getUrlParameter("redirect"),
       };
 
-      window.EndUserBooker.init("booker", config);
+      // Initialize the booker when the script loads
+      if (window.EndUserBooker) {
+        window.EndUserBooker.init("booker", config);
+      } else {
+        // Wait for the script to load
+        window.addEventListener("load", () => {
+          if (window.EndUserBooker) {
+            window.EndUserBooker.init("booker", config);
+          }
+        });
+      }
     </script>
   </body>
 </html>
