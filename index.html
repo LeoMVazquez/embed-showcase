@@ -8,7 +8,7 @@
 
   <body>
     <div id="booker" />
-    <script src="https://cdn-agendapro.s3.us-west-2.amazonaws.com/libraries/end-user-booker/end-user-booker.js"></script>
+    <script src="https://cdn-agendapro.s3.us-west-2.amazonaws.com/libraries/end-user-booker/end-user-booker-latest.js"></script>
     <script>
       function getUrlParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -26,6 +26,7 @@
         locale: getUrlParameter("locale"),
         locationId: parseIfNumber(getUrlParameter("locationId")),
         companyId: parseIfNumber(getUrlParameter("companyId")),
+        redirect: getUrlParameter("redirect"),
       };
 
       window.EndUserBooker.init("booker", config);
