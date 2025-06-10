@@ -22,11 +22,22 @@
         return isNaN(num) ? value : num;
       }
 
+      const defaultConfig = {
+        website: "barberiadeestebanquito",
+        locale: "cw",
+        locationId: 359239,
+        companyId: 375462,
+      };
+
       const config = {
-        website: getUrlParameter("website"),
-        locale: getUrlParameter("locale"),
-        locationId: parseIfNumber(getUrlParameter("locationId")),
-        companyId: parseIfNumber(getUrlParameter("companyId")),
+        website: getUrlParameter("website") || defaultConfig.website,
+        locale: getUrlParameter("locale") || defaultConfig.locale,
+        locationId:
+          parseIfNumber(getUrlParameter("locationId")) ||
+          defaultConfig.locationId,
+        companyId:
+          parseIfNumber(getUrlParameter("companyId")) ||
+          defaultConfig.companyId,
       };
 
       window.EndUserBooker.init("booker", config);
