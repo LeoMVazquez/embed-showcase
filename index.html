@@ -1,13 +1,27 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-  </head>
-  <body>
-    <div id="app">Test</div>
-    
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Embed showcase</title>
+</head>
+
+<body>
+  <div id="booker" />
+  <script src="https://cdn-agendapro.s3.us-west-2.amazonaws.com/libraries/end-user-booker/end-user-booker.js"></script>
+  <script>
+    window.EndUserBooker.init('booker', {
+      website: 'barberiadeestebanquito',
+      locale: 'cw',
+      locationId: 359239,
+      companyId: 375462,
+    });
+  </script>
+  </script>
+
+
+</body>
+
 </html>
